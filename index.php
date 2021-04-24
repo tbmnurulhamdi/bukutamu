@@ -9,16 +9,17 @@ if (isset($_GET['pesan'])) {
    }
 }
 ?>
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-   <!-- Required meta tags -->
-   <meta charset="utf-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
    <!-- Bootstrap CSS -->
-   <link href="/assets/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+   <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+
+
 
    <title>BUKU TAMU</title>
 </head>
@@ -36,7 +37,7 @@ if (isset($_GET['pesan'])) {
                   </svg>
                </a>
                <ul class="dropdown-menu dropdown-menu-end">
-                  <li><a class="dropdown-item" href="#">Daftar Tamu</a></li>
+                  <li><a class="dropdown-item" href="daftartamu.php">Daftar Tamu</a></li>
                   <li><a class="dropdown-item" href="#">Laporan</a></li>
                   <li>
                      <hr class="dropdown-divider">
@@ -198,8 +199,9 @@ if (isset($_GET['pesan'])) {
    </script>
    <!-- akhir bagian script kamera dan gambar -->
 
+   <script src="assets/js/jquery-3.6.0.min.js"></script>
    <!-- script jquery -->
-   <script src="/assets/js/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
 
 
    <!-- awal script pergantian dari kamera ke gambar -->
@@ -223,7 +225,5 @@ if (isset($_GET['pesan'])) {
    <!-- Optional JavaScript; choose one of the two! -->
 
    <!-- Option 1: Bootstrap Bundle with Popper -->
-   <script src="/assets/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+   <script src="assets/js/bootstrap.bundle.min.js"></script>
 </body>
-
-</html>
