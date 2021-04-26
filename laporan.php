@@ -1,14 +1,3 @@
-<?php
-if (isset($_GET['pesan'])) {
-   if ($_GET['pesan'] == "berhasil") {
-      echo "<script> window.alert('data berhasil di hapus'); </script>";
-   } elseif ($_GET['pesan'] == "gagal") {
-      echo "<script>window.alert('gagal hapus');</script>";
-   } elseif ($_GET['pesam'] == "gagal") {
-      echo "<script>window.alert('invalid');</script>";
-   }
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,8 +7,6 @@ if (isset($_GET['pesan'])) {
 
    <!-- Bootstrap CSS -->
    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-
-   <link rel="stylesheet" href="assets/css/datatables.min.css">
 
 
 
@@ -43,11 +30,12 @@ if (isset($_GET['pesan'])) {
                      <a class="dropdown-item" href="index.php">Input</a>
                   </li>
                   <li>
-                     <a class="dropdown-item" href="#">Daftar Tamu</a>
+                     <a class="dropdown-item" href="daftartamu.php">Daftar Tamu</a>
                   </li>
                   <li>
-                     <a class="dropdown-item" href="laporan.php">Laporan</a>
+                     <a class="dropdown-item" href="">Laporan</a>
                   </li>
+
                   <li>
                      <hr class="dropdown-divider">
                   </li>
@@ -71,36 +59,13 @@ if (isset($_GET['pesan'])) {
                <div class="w-100">
                   <div class="row">
 
-                     <!-- awal bagian form input -->
-                     <div class="col-sm-11">
-                        <div class="card">
-                           <div class="card-body">
-                              <h5 class="card-title mb-4">Daftar Tamu</h5>
-
-                              <table id="tabel" class="table table-striped table-sm text-center">
-                                 <thead>
-
-                                    <tr class="text-center">
-                                       <th>Tanggal Datang</th>
-                                       <th>Nama Tamu</th>
-                                       <th>Instansi/Perusahaan</th>
-                                       <th>Tujuan Datang</th>
-                                       <th>Suhu Tubuh</th>
-                                       <th>Foto Tamu</th>
-                                    </tr>
-                                 </thead>
-                              </table>
-                           </div>
-                        </div>
-                     </div>
-                     <!-- akhir bagian form input -->
 
                      <div class="col-sm-10">
                         <div class="card">
                            <div class="card-body">
-                              <h5 class="card-title mb-4">Hapus</h5>
+                              <h5 class="card-title mb-4">Laporan</h5>
 
-                              <form action="hapustamu.php" method="POST">
+                              <form action="cetak.php" method="POST" target="_blank">
                                  <div class="row">
                                     <div class="col-sm-3">
                                        <input type="date" id="tgldari" class="form-control form-control-sm" name="tgldari">
@@ -112,7 +77,7 @@ if (isset($_GET['pesan'])) {
                                        <input type="date" id="tglke" class="form-control form-control-sm" name="tglke">
                                     </div>
                                     <div class="col-auto">
-                                       <button type="submit" id="hapus" class="btn btn-danger btn-sm p-1" onclick="return confirm('Anda yakin mau menghapus item ini ?')" name="hapus">HAPUS</button>
+                                       <button type="submit" class="btn btn-danger btn-sm p-1" name="cetak">CETAK</button>
                                     </div>
                                  </div>
                               </form>
@@ -134,51 +99,10 @@ if (isset($_GET['pesan'])) {
    <!-- script jquery -->
    <script src="assets/js/jquery-3.6.0.min.js"></script>
 
-   <script src="assets/js/datatables.min.js"></script>
 
 
    <!-- Option 1: Bootstrap Bundle with Popper -->
    <script src="assets/js/bootstrap.bundle.min.js"></script>
-
-   <script type="text/javascript">
-      $(document).ready(function() {
-         $('#tabel').DataTable({
-            "processing": true,
-            "serverSide": true,
-            "ajax": "data.php",
-            "columns": [{
-                  "data": "tanggal"
-               },
-               {
-                  "data": "nama"
-               },
-               {
-                  "data": "instansi"
-               },
-               {
-                  "data": "tujuan"
-               },
-               {
-                  "data": "suhu"
-               },
-               {
-                  "data": "foto_tamu"
-               }
-            ],
-            "scrollX": true,
-            "order": [
-               [0, "desc"]
-            ],
-            // "paging": false,
-            // "ordering": false,
-            // "searching": false,
-            // "info": false
-         });
-
-
-
-      });
-   </script>
 
 </body>
 

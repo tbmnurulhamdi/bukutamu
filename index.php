@@ -6,6 +6,8 @@ if (isset($_GET['pesan'])) {
       echo "<script> window.alert('data sudah masuk'); </script>";
    } elseif ($_GET['pesan'] == "gagal") {
       echo "<script>window.alert('gagal input');</script>";
+   } elseif ($_GET['pesam'] == "gagal") {
+      echo "<script>window.alert('invalid');</script>";
    }
 }
 ?>
@@ -37,13 +39,21 @@ if (isset($_GET['pesan'])) {
                   </svg>
                </a>
                <ul class="dropdown-menu dropdown-menu-end">
-                  <li><a class="dropdown-item" href="daftartamu.php">Daftar Tamu</a></li>
-                  <li><a class="dropdown-item" href="#">Laporan</a></li>
+                  <li>
+                     <a class="dropdown-item" href="">Input</a>
+                  </li>
+                  <li>
+                     <a class="dropdown-item" href="daftartamu.php">Daftar Tamu</a>
+                  </li>
+                  <li>
+                     <a class="dropdown-item" href="laporan.php">Laporan</a></li>
                   <li>
                      <hr class="dropdown-divider">
                   </li>
                   <!--  tombol log out -->
-                  <li><a class="dropdown-item" href="#">keluar >>></a></li>
+                  <li>
+                     <a class="dropdown-item" href="#">keluar >>></a>
+                  </li>
                </ul>
             </div>
          </div>
@@ -161,9 +171,9 @@ if (isset($_GET['pesan'])) {
                height: 300, // ukuran tinggi video/gambar yang akan diambil
 
                // fungsi dibawah ini untuk menggunakan kamera belakang, hapus saja jika ingin kamera depan
-               // facingMode: {
-               //    exact: "environment"
-               // }
+               facingMode: {
+                  exact: "environment"
+               }
 
             }
          })
