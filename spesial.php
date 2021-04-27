@@ -2,9 +2,10 @@
 session_start();
 
 // cek apakah yang mengakses halaman ini sudah login
-if ($_SESSION['level'] == "") {
+if ($_SESSION['level'] == "") { // jika tidak login terlebih dahulu maka akan dialihkan ke index
    header("location:index.php?pesan=login");
 }
+
 
 if (isset($_GET['pesan'])) {
    if ($_GET['pesan'] == "berhasil") {
@@ -35,8 +36,11 @@ if (isset($_GET['pesan'])) {
    <!-- awal navbar -->
    <nav class="navbar" style="background-color: #207504;">
       <div class="container-fluid">
-         <a href="spesial.php" class="navbar-brand"><img src="assets/image/logo-kemenag-footer.png" alt="" width="200"></a>
+         <!-- memanggil file image -->
+         <a href="spesial.php" class="navbar-brand"><img src="" alt="" width="200"></a>
          <div class="d-flex">
+
+            <!-- awal nav dropdown -->
             <div class="nav-item dropdown">
                <a role="button" class="btn dropdown-toggle text-light " data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
                   <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
@@ -65,6 +69,7 @@ if (isset($_GET['pesan'])) {
                   </li>
                </ul>
             </div>
+            <!-- akhir nav dropdown -->
          </div>
       </div>
    </nav>
@@ -80,12 +85,17 @@ if (isset($_GET['pesan'])) {
                <div class="w-100">
                   <div class="row">
 
+                     <!-- perhatikan setiap bagian yang ada elemen id karena id akan kita panggil di script js  ayng berada dibawah -->
                      <!-- awal kotak bagian camera -->
                      <div class="col-sm-4">
                         <div class="card">
                            <div class="card-body">
                               <div class="text-center">
+
                                  <h5 class="card-title mb-4">Foto</h5>
+
+                                 <!-- perhatikan nama class d-none. namae class dari bootstrap ini digunakan untuk menyembunyikan atribut html. -->
+                                 <!-- kita akan bermain name class d-none di js untuk bertukar kemunculan antara vatribut video dan img -->
 
                                  <!-- bagian video -->
                                  <video id="preview" class="rounded"></video>
@@ -108,6 +118,8 @@ if (isset($_GET['pesan'])) {
                                  <button id="hapusfoto" class="btn btn-outline-danger btn-sm"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                        <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
                                     </svg></button>
+
+                                 <!-- 2 tombol diata kiata gunakan untuk pertukaran kemunculan atribut html -->
                               </div>
 
                            </div>
@@ -120,11 +132,15 @@ if (isset($_GET['pesan'])) {
                         <div class="card">
                            <div class="card-body">
                               <h5 class="card-title mb-4">Input Tamu</h5>
+
+                              <!-- mengirimkan value dari sini ke file inputtamu dengan cara POST -->
                               <form action="inputtamu.php" method="POST">
                                  <div class="mb-3">
-                                    <input type="hidden" class="form-control form-control-sm" name="foto" id="inputfoto">
 
-                                    <input type="date" class="form-control form-control-sm d-none" name="tanggal" value="<?php echo date("Y-m-d"); ?>">
+                                    <input type="hidden" class="form-control form-control-sm" name="foto" id="inputfoto"> <!-- elemen id ini akan kita panggil juga di script js -->
+
+                                    <!-- date(Y-m-d) untuk menentukan tanggal hari ini -->
+                                    <input type="date" class="form-control form-control-sm d-none" name="tanggal" value="<?php echo date("Y-m-d"); ?>"> <!-- date(Y-m-d) untuk menentukan tanggal hari ini -->
                                  </div>
                                  <div class="mb-3">
 
@@ -180,9 +196,10 @@ if (isset($_GET['pesan'])) {
                height: 300, // ukuran tinggi video/gambar yang akan diambil
 
                // fungsi dibawah ini untuk menggunakan kamera belakang, hapus saja jika ingin kamera depan
-               facingMode: {
-                  exact: "environment"
-               }
+
+               // facingMode: {
+               //    exact: "environment"
+               // }
 
             }
          })
@@ -211,7 +228,7 @@ if (isset($_GET['pesan'])) {
          context.drawImage(preview, 0, 0, output.width, output.height);
          result.src = output.toDataURL();
 
-         // mengirim/mengambil value url dari elemen img ke input text untuk diproses
+         // mengirim/mengambil value url dari elemen img ke input text dengan name foto untuk diproses
          var input_foto = document.getElementById("result").src;
          document.getElementById("inputfoto").value = input_foto;
       });
@@ -223,15 +240,16 @@ if (isset($_GET['pesan'])) {
 
 
 
-   <!-- awal script pergantian dari kamera ke gambar -->
+   <!-- awal script pertukaran dari kamera/video ke gambar/img -->
+   <!-- dibawah ini merupakan atribut yang hanya berfungsi jika terhubung jquery -->
    <script>
       $(document).ready(function() {
 
-         $("#capture").click(function() {
-            $("#preview").addClass("d-none");
-            $("#result").removeClass("d-none");
+         $("#capture").click(function() { //tombol capture di klik maka akan bertukar posisi dengan img
+            $("#preview").addClass("d-none"); //d-none akan ditambahkan ke atribut video/kamera
+            $("#result").removeClass("d-none"); //d-none akan dihapuskan dari atribut img/gambar
          })
-         $("#hapusfoto").click(function() {
+         $("#hapusfoto").click(function() { //tombol hapus diklik maka akan sebaliknya
             $("#result").addClass("d-none");
             $("#preview").removeClass("d-none");
          })
@@ -241,7 +259,6 @@ if (isset($_GET['pesan'])) {
    <!-- akhir script pergantian dari kamera ke gambar -->
 
 
-   <!-- Optional JavaScript; choose one of the two! -->
 
    <!-- Option 1: Bootstrap Bundle with Popper -->
    <script src="assets/js/bootstrap.bundle.min.js"></script>

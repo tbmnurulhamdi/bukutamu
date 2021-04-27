@@ -1,6 +1,8 @@
 <?php
 session_start();
-if ($_SESSION['level'] == "") {
+
+// cek apakah yang mengakses halaman ini sudah login
+if ($_SESSION['level'] == "") { // jika tidak login terlebih dahulu maka akan dialihkan ke index
    header("location:index.php?pesan=login");
 }
 if (isset($_GET['pesan'])) {
@@ -23,9 +25,10 @@ if (isset($_GET['pesan'])) {
    <!-- Bootstrap CSS -->
    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
 
+   <!-- datatables CSS -->
    <link rel="stylesheet" href="assets/css/datatables.min.css">
 
-
+   <!-- link unduh css dan js datatables https://datatables.net/releases/DataTables-1.10.24.zip -->
 
    <title>BUKU TAMU</title>
 </head>
@@ -34,7 +37,7 @@ if (isset($_GET['pesan'])) {
    <!-- awal navbar -->
    <nav class="navbar" style="background-color: #207504;">
       <div class="container-fluid">
-         <a href="spesial.php" class="navbar-brand"><img src="assets/image/logo-kemenag-footer.png" alt="" width="200"></a>
+         <a href="spesial.php" class="navbar-brand"><img src="" alt="" width="200"></a>
          <div class="d-flex">
             <div class="nav-item dropdown">
                <a role="button" class="btn btn-sm dropdown-toggle text-light " data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
@@ -78,12 +81,13 @@ if (isset($_GET['pesan'])) {
                <div class="w-100">
                   <div class="row">
 
-                     <!-- awal bagian form input -->
+                     <!-- awal bagian daftar tamu -->
                      <div class="col-sm-11">
                         <div class="card">
                            <div class="card-body">
                               <h5 class="card-title mb-4">Daftar Tamu</h5>
 
+                              <!-- perhatikan id tabel, ini akan di panggil oleh script js -->
                               <table id="tabel" class="table table-striped table-sm text-center">
                                  <thead>
 
@@ -100,13 +104,15 @@ if (isset($_GET['pesan'])) {
                            </div>
                         </div>
                      </div>
-                     <!-- akhir bagian form input -->
+                     <!-- akhir bagian daftar tamu -->
 
+                     <!-- awal bagian form hapus -->
                      <div class="col-sm-10">
                         <div class="card">
                            <div class="card-body">
                               <h5 class="card-title mb-4">Hapus</h5>
 
+                              <!-- teknik penhapusan disini menggunakan tanggal, misalkan hapus dari tanggal sampai ke tanggal -->
                               <form action="hapustamu.php" method="POST">
                                  <div class="row">
                                     <div class="col-sm-3">
@@ -126,7 +132,7 @@ if (isset($_GET['pesan'])) {
                            </div>
                         </div>
                      </div>
-
+                     <!-- akhir bagian form hapus -->
                   </div>
                </div>
             </div>
@@ -141,12 +147,14 @@ if (isset($_GET['pesan'])) {
    <!-- script jquery -->
    <script src="assets/js/jquery-3.6.0.min.js"></script>
 
+   <!-- script js datatables -->
    <script src="assets/js/datatables.min.js"></script>
 
 
    <!-- Option 1: Bootstrap Bundle with Popper -->
    <script src="assets/js/bootstrap.bundle.min.js"></script>
 
+   <!-- awal script operasikan datatables -->
    <script type="text/javascript">
       $(document).ready(function() {
          $('#tabel').DataTable({
@@ -186,6 +194,7 @@ if (isset($_GET['pesan'])) {
 
       });
    </script>
+   <!-- akhir script operasikan datatables -->
 
 </body>
 

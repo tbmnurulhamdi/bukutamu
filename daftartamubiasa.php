@@ -34,7 +34,7 @@ if (isset($_GET['pesan'])) {
    <!-- awal navbar -->
    <nav class="navbar" style="background-color: #207504;">
       <div class="container-fluid">
-         <a href="biasa.php" class="navbar-brand"><img src="assets/image/logo-kemenag-footer.png" alt="" width="200"></a>
+         <a href="biasa.php" class="navbar-brand"><img src="" alt="" width="200"></a>
          <div class="d-flex">
             <div class="nav-item dropdown">
                <a role="button" class="btn btn-sm dropdown-toggle text-light " data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
