@@ -28,15 +28,15 @@ if (isset($_POST['input'])) {
    $sql = "INSERT INTO daftartamu (id_tamu, foto_tamu, tgl_datang, nama_tamu, instansi, tujuan, suhu) VALUES ('$idtamu', '$pasfoto', '$tanggal', '$namatamu', '$instansi', '$tujuan', '$suhu')";
    $result = mysqli_query($koneksi, $sql);
    if ($result) {
-      header('Location:index.php?pesan=berhasil');
+      header('Location:spesial.php?pesan=berhasil');
 
       exit;
    } else {
       echo mysqli_error($koneksi);
-      header('Location:index.php?pesan=gagal');
+      header('Location:spesial.php?pesan=gagal');
       exit;
    }
 } else {
-   // mengalihkan halaman kembali ke index.php
-   header("location: index.php?pesan=invalid");
+   // mengalihkan halaman kembali ke spesial.php
+   header("location: spesial.php?pesan=invalid");
 }

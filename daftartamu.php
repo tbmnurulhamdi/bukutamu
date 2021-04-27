@@ -1,4 +1,8 @@
 <?php
+session_start();
+if ($_SESSION['level'] == "") {
+   header("location:index.php?pesan=login");
+}
 if (isset($_GET['pesan'])) {
    if ($_GET['pesan'] == "berhasil") {
       echo "<script> window.alert('data berhasil di hapus'); </script>";
@@ -30,7 +34,7 @@ if (isset($_GET['pesan'])) {
    <!-- awal navbar -->
    <nav class="navbar" style="background-color: #207504;">
       <div class="container-fluid">
-         <a href="index.php" class="navbar-brand"><img src="assets/image/logo-kemenag-footer.png" alt="" width="200"></a>
+         <a href="spesial.php" class="navbar-brand"><img src="assets/image/logo-kemenag-footer.png" alt="" width="200"></a>
          <div class="d-flex">
             <div class="nav-item dropdown">
                <a role="button" class="btn btn-sm dropdown-toggle text-light " data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
@@ -40,19 +44,22 @@ if (isset($_GET['pesan'])) {
                </a>
                <ul class="dropdown-menu dropdown-menu-end">
                   <li>
-                     <a class="dropdown-item" href="index.php">Input</a>
+                     <a class="dropdown-item" href="spesial.php">Input</a>
                   </li>
                   <li>
-                     <a class="dropdown-item" href="#">Daftar Tamu</a>
+                     <a class="dropdown-item" href="">Daftar Tamu</a>
                   </li>
                   <li>
                      <a class="dropdown-item" href="laporan.php">Laporan</a>
                   </li>
                   <li>
+                     <a class="dropdown-item" href="#">Unduh Aplikasi</a>
+                  </li>
+                  <li>
                      <hr class="dropdown-divider">
                   </li>
                   <!--  tombol log out -->
-                  <li><a class="dropdown-item" href="#">keluar >>></a></li>
+                  <li><a class="dropdown-item" href="logout.php" onclick="return confirm('Anda yakin ingin keluar ?')">keluar >>></a></li>
                </ul>
             </div>
          </div>
@@ -145,7 +152,7 @@ if (isset($_GET['pesan'])) {
          $('#tabel').DataTable({
             "processing": true,
             "serverSide": true,
-            "ajax": "data.php",
+            "ajax": "include/data.php",
             "columns": [{
                   "data": "tanggal"
                },

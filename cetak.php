@@ -47,7 +47,6 @@ if (isset($_POST['cetak'])) {
                   <P class="ukfont12">dari tanggal <?php echo $tgldari; ?> sampai tanggal <?php echo $tglke; ?> </P>
                </div>
 
-
                <!-- awal bagian kotak layout -->
                <div class="col-xl-9 col-xxl-8 d-flex">
                   <div class="w-100">
@@ -92,9 +91,11 @@ if (isset($_POST['cetak'])) {
                                           </tr>
                                     <?php
                                           $no++;
+                                          echo '<script type="text/javascript">window.print();</script>';
                                        }
                                     } else {
-                                       echo 'gagal';
+                                       echo '<h1 class="jsfont" >Not Found</h1>';
+                                       echo '<p class="jsfont">The requested URL /bukutamu/cetak.php was not found on this server.</p>';
                                     }
                                     ?>
                                     </tbody>
@@ -139,7 +140,7 @@ if (isset($_POST['cetak'])) {
 
 
          });
-         window.print();
+         
       </script>
 
    </body>

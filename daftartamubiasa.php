@@ -3,7 +3,15 @@ session_start();
 if ($_SESSION['level'] == "") {
    header("location:index.php?pesan=login");
 }
-
+if (isset($_GET['pesan'])) {
+   if ($_GET['pesan'] == "berhasil") {
+      echo "<script> window.alert('data berhasil di hapus'); </script>";
+   } elseif ($_GET['pesan'] == "gagal") {
+      echo "<script>window.alert('gagal hapus');</script>";
+   } elseif ($_GET['pesam'] == "gagal") {
+      echo "<script>window.alert('invalid');</script>";
+   }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,6 +23,8 @@ if ($_SESSION['level'] == "") {
    <!-- Bootstrap CSS -->
    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
 
+   <link rel="stylesheet" href="assets/css/datatables.min.css">
+
 
 
    <title>BUKU TAMU</title>
@@ -24,7 +34,7 @@ if ($_SESSION['level'] == "") {
    <!-- awal navbar -->
    <nav class="navbar" style="background-color: #207504;">
       <div class="container-fluid">
-         <a href="spesial.php" class="navbar-brand"><img src="assets/image/logo-kemenag-footer.png" alt="" width="200"></a>
+         <a href="biasa.php" class="navbar-brand"><img src="assets/image/logo-kemenag-footer.png" alt="" width="200"></a>
          <div class="d-flex">
             <div class="nav-item dropdown">
                <a role="button" class="btn btn-sm dropdown-toggle text-light " data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
@@ -34,18 +44,14 @@ if ($_SESSION['level'] == "") {
                </a>
                <ul class="dropdown-menu dropdown-menu-end">
                   <li>
-                     <a class="dropdown-item" href="spesial.php">Input</a>
+                     <a class="dropdown-item" href="biasa.php">Input</a>
                   </li>
                   <li>
-                     <a class="dropdown-item" href="daftartamu.php">Daftar Tamu</a>
-                  </li>
-                  <li>
-                     <a class="dropdown-item" href="">Laporan</a>
+                     <a class="dropdown-item" href="">Daftar Tamu</a>
                   </li>
                   <li>
                      <a class="dropdown-item" href="#">Unduh Aplikasi</a>
                   </li>
-
                   <li>
                      <hr class="dropdown-divider">
                   </li>
@@ -69,31 +75,30 @@ if ($_SESSION['level'] == "") {
                <div class="w-100">
                   <div class="row">
 
-
-                     <div class="col-sm-10">
+                     <!-- awal bagian form input -->
+                     <div class="col-sm-11">
                         <div class="card">
                            <div class="card-body">
-                              <h5 class="card-title mb-4">Laporan</h5>
+                              <h5 class="card-title mb-4">Daftar Tamu</h5>
 
-                              <form action="cetak.php" method="POST" target="_blank">
-                                 <div class="row">
-                                    <div class="col-sm-3">
-                                       <input type="date" id="tgldari" class="form-control form-control-sm" name="tgldari">
-                                    </div>
-                                    <div class="col-sm-2">
-                                       <p class="text-center">>>sampai>></p>
-                                    </div>
-                                    <div class="col-sm-3">
-                                       <input type="date" id="tglke" class="form-control form-control-sm" name="tglke">
-                                    </div>
-                                    <div class="col-auto">
-                                       <button type="submit" class="btn btn-danger btn-sm p-1" name="cetak">CETAK</button>
-                                    </div>
-                                 </div>
-                              </form>
+                              <table id="tabel" class="table table-striped table-sm text-center">
+                                 <thead>
+
+                                    <tr class="text-center">
+                                       <th>Tanggal Datang</th>
+                                       <th>Nama Tamu</th>
+                                       <th>Instansi/Perusahaan</th>
+                                       <th>Tujuan Datang</th>
+                                       <th>Suhu Tubuh</th>
+                                       <th>Foto Tamu</th>
+                                    </tr>
+                                 </thead>
+                              </table>
                            </div>
                         </div>
                      </div>
+                     <!-- akhir bagian form input -->
+
 
                   </div>
                </div>
@@ -109,10 +114,51 @@ if ($_SESSION['level'] == "") {
    <!-- script jquery -->
    <script src="assets/js/jquery-3.6.0.min.js"></script>
 
+   <script src="assets/js/datatables.min.js"></script>
 
 
    <!-- Option 1: Bootstrap Bundle with Popper -->
    <script src="assets/js/bootstrap.bundle.min.js"></script>
+
+   <script type="text/javascript">
+      $(document).ready(function() {
+         $('#tabel').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "ajax": "include/data.php",
+            "columns": [{
+                  "data": "tanggal"
+               },
+               {
+                  "data": "nama"
+               },
+               {
+                  "data": "instansi"
+               },
+               {
+                  "data": "tujuan"
+               },
+               {
+                  "data": "suhu"
+               },
+               {
+                  "data": "foto_tamu"
+               }
+            ],
+            "scrollX": true,
+            "order": [
+               [0, "desc"]
+            ],
+            // "paging": false,
+            // "ordering": false,
+            // "searching": false,
+            // "info": false
+         });
+
+
+
+      });
+   </script>
 
 </body>
 

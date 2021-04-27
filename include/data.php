@@ -1,5 +1,11 @@
 
 <?php
+session_start();
+if ($_SESSION['level'] == "") {
+	session_destroy();
+	header("location:../index.php?pesan=terlarang");
+}
+
 $table = 'daftartamu';
 $primaryKey = 'id_tamu';
 $columns = array(
@@ -25,14 +31,9 @@ $columns = array(
 
 
 );
+require('conn.php');
 
-$sql_details = array(
-	'user' => 'root',
-	'pass' => '',
-	'db'   => 'bukutamu',
-	'host' => 'localhost'
-);
-require('include/ssp.class.php');
+require('ssp.class.php');
 
 echo json_encode(
 	SSP::simple($_GET, $sql_details, $table, $primaryKey, $columns)
