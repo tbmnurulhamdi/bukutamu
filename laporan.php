@@ -75,6 +75,8 @@ if ($_SESSION['level'] == "") {
                            <div class="card-body">
                               <h5 class="card-title mb-4">Laporan</h5>
 
+                              <!-- laporan ini didefinisikan dengan rentang parameter tanggal -->
+                              <!-- perhatikan elemen target."_blank" digunakan untuk berpindah ke tab baru. https://www.w3schools.com/tags/att_a_target.asp-->
                               <form action="cetak.php" method="POST" target="_blank">
                                  <div class="row">
                                     <div class="col-sm-3">

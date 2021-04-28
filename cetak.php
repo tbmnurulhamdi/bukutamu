@@ -1,11 +1,14 @@
 <?php
 require_once "include/koneksi.php";
 
+
 if (isset($_POST['cetak'])) {
    $tgldari = $_POST['tgldari'];
    $tglke = $_POST['tglke'];
 
 ?>
+
+   <!-- DISINI TIDAK MENGGUNAKAN SERVER_SIDE MELAINKAN MENGGUNAKAN PHP NATIVE SELECT DATABASE UNTUK MENGAMBIL DATANYA BERDASARKAN 2 PARAMETER TANGGAL YANG DIINPUT DI FILE FORM LAPORAN -->
    <!DOCTYPE html>
    <html lang="en">
 
@@ -18,6 +21,8 @@ if (isset($_POST['cetak'])) {
 
       <link rel="stylesheet" href="assets/css/datatables.min.css">
 
+
+      <!-- membuat style font tersendiri -->
       <style>
          .jsfont {
             font-family: "Times New Roman", Times, serif;
@@ -42,6 +47,7 @@ if (isset($_POST['cetak'])) {
       <div class="content">
          <div class="container-fluid p-0">
             <div class="row">
+               <!-- tulisan bagian atas -->
                <div class="text-center jsfont">
                   <p class="fs-5 fw-bold ukfont14">LAPORAN DAFTAR TAMU</p>
                   <P class="ukfont12">dari tanggal <?php echo $tgldari; ?> sampai tanggal <?php echo $tglke; ?> </P>
@@ -70,6 +76,7 @@ if (isset($_POST['cetak'])) {
                                        </tr>
                                     </thead>
                                     <tbody class="jsfont">
+                                       <!-- KARENA LANGUSUNG DOPROSES DIHALAMAN INI MAKA HARUS DI MASUKAN DIDALAM ATRIBUT <tbody> -->
                                        <?php
                                        $no = 1;
 
@@ -78,6 +85,7 @@ if (isset($_POST['cetak'])) {
                                        $cetak = mysqli_query($koneksi, $sql) or die(mysqli_error($koneksi));
 
 
+                                       //PENGAMBILAN DATA DARI DATABASE DENGAN ARRAY
                                        while ($data = mysqli_fetch_array($cetak)) {
                                        ?>
                                           <tr>
@@ -91,9 +99,11 @@ if (isset($_POST['cetak'])) {
                                           </tr>
                                     <?php
                                           $no++;
+                                          // SAAT DATA BERHSIL DISAJIKAN, MAKA PHP AKAN MENAMPILKAN SCRIPT JS  window.print() UNTUK BISA LANGSUNG OPRASI CETAK WEBPAGE MENJADI DOKUMEN
                                           echo '<script type="text/javascript">window.print();</script>';
                                        }
                                     } else {
+                                       // SAAT TIDAK ADA VALUE DARI ELEMEN NAME DI FILE LAPORAN MAKA AKAN MENAMPILKAN TEXT BERIKUT
                                        echo '<h1 class="jsfont" >Not Found</h1>';
                                        echo '<p class="jsfont">The requested URL /bukutamu/cetak.php was not found on this server.</p>';
                                     }
@@ -131,16 +141,14 @@ if (isset($_POST['cetak'])) {
                "order": [
                   [1, "desc"]
                ],
-               "paging": false,
-               // "ordering": false,
-               "searching": false,
-               "info": false
+               "paging": false, // MENGHLANGKAN PAGING
+               "searching": false, // MENGHILANGKAN SEARCH
+               "info": false // MENGHILANGKAN INFO BERAPA DATA YANG DILOOPING
             });
 
 
 
          });
-         
       </script>
 
    </body>

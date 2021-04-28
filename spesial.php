@@ -187,16 +187,14 @@ if (isset($_GET['pesan'])) {
          document.getElementById('imgurl')
 
       ]
-
-      // proses pemanggilan kamera device
+      // proses pemanggilan kamera device https://developer.mozilla.org/en-US/docs/Web/API/Navigator/getUserMedia
       navigator.mediaDevices.getUserMedia({
             audio: false,
             video: {
                width: 300, // ukuran lebar video/gambar yang akan diambil
                height: 300, // ukuran tinggi video/gambar yang akan diambil
 
-               // fungsi dibawah ini untuk menggunakan kamera belakang, hapus saja jika ingin kamera depan
-
+               // fungsi dibawah ini untuk menggunakan kamera belakang, hapus saja jika ingin kamera depan https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
                // facingMode: {
                //    exact: "environment"
                // }

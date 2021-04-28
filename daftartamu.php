@@ -87,7 +87,7 @@ if (isset($_GET['pesan'])) {
                            <div class="card-body">
                               <h5 class="card-title mb-4">Daftar Tamu</h5>
 
-                              <!-- perhatikan id tabel, ini akan di panggil oleh script js -->
+                              <!-- perhatikan id tabel, ini akan di panggil oleh script js untuk datatables -->
                               <table id="tabel" class="table table-striped table-sm text-center">
                                  <thead>
 
@@ -126,6 +126,7 @@ if (isset($_GET['pesan'])) {
                                     </div>
                                     <div class="col-auto">
                                        <button type="submit" id="hapus" class="btn btn-danger btn-sm p-1" onclick="return confirm('Anda yakin mau menghapus item ini ?')" name="hapus">HAPUS</button>
+                                       <!-- perhatikan elemen onclick, ini digunakan untuk mengkonfirmasi apakah iya atau tidak saat menekan tombol -->
                                     </div>
                                  </div>
                               </form>
@@ -156,11 +157,17 @@ if (isset($_GET['pesan'])) {
 
    <!-- awal script operasikan datatables -->
    <script type="text/javascript">
+      // webpage datatables https://datatables.net/examples/index
       $(document).ready(function() {
+
+         // konfigurasi awal datatables: https://datatables.net/examples/basic_init/zero_configuration.html
          $('#tabel').DataTable({
+
+            // karena ini menggunakan webserver maka kita menggunakan datatables server-side: https://datatables.net/examples/data_sources/server_side.html
             "processing": true,
             "serverSide": true,
-            "ajax": "include/data.php",
+            "ajax": "include/data.php", // mengambil data dari pemprosesan server-side script
+            // mengidentifikasi data yang didapatkan dari server-side script
             "columns": [{
                   "data": "tanggal"
                },
@@ -180,14 +187,14 @@ if (isset($_GET['pesan'])) {
                   "data": "foto_tamu"
                }
             ],
-            "scrollX": true,
+
+            "scrollX": true, // untuk bisa bergulir secara horizontal https://datatables.net/examples/basic_init/scroll_x.html
+
+            // untuk menentukan default sorting, ini berdasarkan kolom dihitung mulai dari 0 (kiri)
+            // https://datatables.net/examples/basic_init/table_sorting.html
             "order": [
-               [0, "desc"]
+               [0, "desc"] // ada "desc" dan "asc"
             ],
-            // "paging": false,
-            // "ordering": false,
-            // "searching": false,
-            // "info": false
          });
 
 

@@ -1,4 +1,6 @@
 <?php
+
+//Informasi koneksi server SQL
 $sql_details = array(
    'user' => 'root',
    'pass' => '',
@@ -6,4 +8,5 @@ $sql_details = array(
    'host' => 'localhost'
 );
 
+// menyamakan data array diatas dengan koneksi sebelumnya
 $con = $sql_details;

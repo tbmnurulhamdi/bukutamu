@@ -2,11 +2,13 @@
 
 require_once "include/koneksi.php";
 
+//menerima value dari daftartamu elemen name
 if (isset($_POST['hapus'])) {
-   $tgldari = $_POST['tgldari'];
-   $tglke = $_POST['tglke'];
+   $tgldari = $_POST['tgldari']; //dari tanggal
+   $tglke = $_POST['tglke']; //ke tanggal
 
 
+   // BETWEEN digunakan sebagai rentang parameter
    $sql = "DELETE FROM daftartamu WHERE tgl_datang BETWEEN '$tgldari' AND '$tglke'";
    $hapus = mysqli_query($koneksi, $sql);
    if ($hapus) {

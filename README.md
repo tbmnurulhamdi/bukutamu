@@ -1,1 +1,3 @@
 # bukutamu
+
+PERHATIAN ELEMEN
